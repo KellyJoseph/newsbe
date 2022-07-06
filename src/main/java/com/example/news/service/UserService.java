@@ -29,14 +29,9 @@ public class UserService {
         return foundUser;
     }
 
-    // public List<User> getAllUsers() {
-    // List<User> foundUsers = userRepo.getAllUsers();
-    // return foundUsers;
-    // }
-
     public List<User> getAllUsers() {
         ArrayList<User> users = new ArrayList<>();
-        userRepo.getAllUsers().forEach(users::add);
+        users.addAll(userRepo.getAllUsers());
         return users;
     }
 

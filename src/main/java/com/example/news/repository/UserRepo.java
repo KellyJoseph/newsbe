@@ -12,6 +12,6 @@ public interface UserRepo extends JpaRepository<User, Long> {
     List<User> getAllUsers();
 
     @Query("select user from User user where user.id = ?1")
-    User findById(Integer user_id);
+    User findById(Integer userId);
 
 }

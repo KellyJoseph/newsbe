@@ -11,7 +11,7 @@ import static org.springframework.util.Assert.notNull;
 public class User implements Serializable {
     @Id
     @Column(name="id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name="user_name")
@@ -29,6 +29,8 @@ public class User implements Serializable {
     @Column(name="registration_date")
     private Date registrationDate;
 
+    public User() {}
+
     public User(String userName, String email, String password, String userType, Date registrationDate) {
         // constructor with required field
         notNull(userName, "Method called with null parameter (application)");
@@ -40,20 +42,34 @@ public class User implements Serializable {
         this.userType = userType;
         this.registrationDate = registrationDate;
     }
-    public User (){
 
+    public String setUserName(String userName){
+        this.userName = userName;
+        return  userName;
+    }
+    public String setEmail(String email) {
+        this.email = email;
+        return email;
+    }
+    public String setPassword(String password) {
+        this.password = password;
+        return password;
+    }
+    public String setUserType(String userType) {
+        this.userType = userType;
+        return userType;
     }
 
-    public void setUserName(){
-
+    public String getUserName(){
+        return userName;
     }
-    public void setEmail() {
-
+    public String getEmail() {
+        return email;
     }
-    public void setPassword() {
-
+    public String getPassword() {
+        return password;
     }
-    public void setUserType() {
-
+    public String getUserType() {
+        return userType;
     }
 }

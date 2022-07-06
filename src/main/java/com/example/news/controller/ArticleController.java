@@ -1,6 +1,7 @@
 package com.example.news.controller;
 
 import com.example.news.model.Article;
+import com.example.news.model.User;
 import com.example.news.service.ArticleService;
 import com.example.news.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -25,10 +26,10 @@ public class ArticleController {
         return "Hello World";
     }
 
-    @GetMapping("/getTestArticle")
-    public Article getTestArticle() {
-        return new Article("This is a title", "This is a body");
-    }
+//    @GetMapping("/getTestArticle")
+//    public Article getTestArticle() {
+//        return new Article("This is a title", "This is a body");
+//    }
 
     @RequestMapping(path = "/createNewArticle", method = RequestMethod.POST)
     public ResponseEntity<Article> createNewArticle(@RequestBody Map<String, String> requestBody) {
@@ -39,9 +40,17 @@ public class ArticleController {
         return new ResponseEntity<Article>(article, HttpStatus.CREATED);
     }
 
-    @GetMapping
-    public List<Article> getAllArticles(){
-        return articleService.getAllArticles();
+    @RequestMapping(path = "/getAllArticles", method = RequestMethod.GET)
+    public ResponseEntity<List<Article>> getAllArticles(){
+
+        List<Article> articles = articleService.getAllArticles();
+        return ResponseEntity.ok().body(articles);
+    }
+
+    @RequestMapping(path = "/getArticleById/{articleId}", method = RequestMethod.GET)
+    public ResponseEntity<Article> getArticleById(@PathVariable("articleId") Integer articleId) {
+        Article article = articleService.getArticleById(articleId);
+        return new ResponseEntity<Article>(article, HttpStatus.OK);
     }
 
 //    @GetMapping("{id}")

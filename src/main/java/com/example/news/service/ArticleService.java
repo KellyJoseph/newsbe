@@ -6,6 +6,7 @@ import com.example.news.repository.ArticleRepo;
 import com.example.news.repository.UserRepo;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,11 +33,14 @@ public class ArticleService {
         return articleRepo.findById(id);
     }
 
-    public Optional<Article> getArticleById(long articleId) {
-        return articleRepo.findById(articleId);
+    public Article getArticleById(Integer articleId) {
+        Article foundArticle = articleRepo.findById(articleId);
+        return foundArticle;
     }
 
     public List<Article> getAllArticles() {
-        return articleRepo.findAll();
+        ArrayList<Article> articles = new ArrayList<>();
+        articles.addAll(articleRepo.getAllArticles());
+        return articles;
     }
 }
